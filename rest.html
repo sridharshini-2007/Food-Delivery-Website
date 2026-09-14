@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodieHub - Food Delivery</title>
+<link rel="stylesheet" href="rest.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        🍔 Foodie<span>Hub</span>
+    </div>
+    <nav>
+        <button
+            id="customerNav"
+            class="active"
+            onclick="showPage('customerPage', this)">
+            🏠 Home
+        </button>
+        <button
+            onclick="showPage('ownerPage', this)">
+            🏪 Owner
+        </button>
+        <button
+            onclick="showPage('profilePage', this)">
+            👤 My Profile
+        </button>
+    </nav>
+</header>
+
+<section id="customerPage" class="page active">
+    <div class="customer-hero">
+        <div class="hero-content">
+            <h1>
+                Hungry?
+                <span>Order your favourite food.</span>
+            </h1>
+            <p>
+                Discover the best restaurants and delicious
+                food around you.
+            </p>
+            <div class="search-container">
+                <span>🔍</span>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for restaurants..."
+                    onkeyup="searchRestaurants()">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 class="section-title">
+            🍽️ Restaurants near you
+        </h2>
+        <div
+            class="restaurant-grid"
+            id="restaurantGrid">
+
+            <div
+                class="restaurant-card"
+                data-name="Spice Garden">
+                <div class="restaurant-image">
+                    🍛
+                </div>
+                <div class="restaurant-info">
+                    <h3>Spice Garden</h3>
+                    <p>
+                        South Indian • Biryani • Meals
+                    </p>
+                    <span class="rating">
+                        ⭐ 4.5
+                    </span>
+                    <button
+                        class="view-menu"
+                        onclick="openRestaurant('Spice Garden')">
+                        View Menu
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="restaurant-card"
+                data-name="Pizza Palace">
+                <div class="restaurant-image">
+                    🍕
+                </div>
+                <div class="restaurant-info">
+                    <h3>Pizza Palace</h3>
+                    <p>
+                        Pizza • Italian • Fast Food
+                    </p>
+                    <span class="rating">
+                        ⭐ 4.4
+                    </span>
+                    <button
+                        class="view-menu"
+                        onclick="openRestaurant('Pizza Palace')">
+                        View Menu
+                    </button>
+                </div>
+            </div>
+
+            
+            <div
+                class="restaurant-card"
+                data-name="Burger Point">
+                <div class="restaurant-image">
+                    🍔
+                </div>
+                <div class="restaurant-info">
+                    <h3>Burger Point</h3>
+                    <p>
+                        Burgers • Fries • Beverages
+                    </p>
+                    <span class="rating">
+                        ⭐ 4.3
+                    </span>
+                    <button
+                        class="view-menu"
+                        onclick="openRestaurant('Burger Point')">
+                        View Menu
+                    </button>
+                </div>
+            </div>
+            
+            <div
+                class="restaurant-card"
+                data-name="Green Leaf">
+                <div class="restaurant-image">
+                    🥗
+                </div>
+                <div class="restaurant-info">
+                    <h3>Green Leaf</h3>
+                    <p>
+                        Healthy • Vegetarian • Salads
+                    </p>
+                    <span class="rating">
+                        ⭐ 4.6
+                    </span>
+                    <button
+                        class="view-menu"
+                        onclick="openRestaurant('Green Leaf')">
+                        View Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        id="menuSection"
+        class="menu-section hidden">
+
+        <button
+            class="back-button"
+            onclick="closeMenu()">
+            ← Back to Restaurants
+        </button>
+        <div class="restaurant-heading">
+            <h2 id="selectedRestaurant"></h2>
+            <p id="restaurantDescription"></p>
+        </div>
+        <div
+            class="menu-grid"
+            id="menuGrid">
+        </div>
+    </div>
+</section>
+
+<section
+    id="ownerPage"
+    class="page owner-page">
+    <div class="owner-top">
+        <h1>
+            🏪 Owner Dashboard
+        </h1>
+        <p>
+            Manage your restaurant orders and sales.
+        </p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <p>Total Orders</p>
+            <h2 id="totalOrders">0</h2>
+        </div>
+        <div class="stat-card">
+            <p>Pending Orders</p>
+            <h2 id="pendingOrders">0</h2>
+        </div>
+        <div class="stat-card">
+            <p>Delivered</p>
+            <h2 id="deliveredOrders">0</h2>
+        </div>
+        <div class="stat-card">
+            <p>Total Sales</p>
+            <h2 id="totalSales">₹0</h2>
+        </div>
+    </div>
+
+    <h2 class="section-title">
+        📦 Customer Orders
+    </h2>
+    <div id="ordersContainer">
+    </div>
+</section>
+
+<section
+    id="profilePage"
+    class="page profile-page">
+    <div class="profile-header">
+        <div class="profile-photo">
+            👩
+        </div>
+        <div>
+            <h2 id="profileName">
+                Sridharshini
+            </h2>
+            <p>dharshini07@gmail.com</p>
+            <p> 📱 +91 97500 17083</p>
+        </div>
+    </div>
+
+    <div class="profile-grid">
+        
+        <div class="profile-card">
+            <h3>
+                👤 Personal Information
+            </h3>
+            <div class="profile-row">
+                <span>Name</span>
+                <br>
+                <strong>Sridharshini</strong>
+            </div>
+            <div class="profile-row">
+                <span>Email</span>
+                <br>
+                <strong>
+                    dharshini07@gmail.com
+                </strong>
+            </div>
+            <div class="profile-row">
+                <span>Phone</span>
+                <br>
+                <strong>
+                    +91 97500 17083
+                </strong>
+            </div>
+        </div>
+
+        <div class="profile-card">
+            <h3>
+                📍 Saved Address
+            </h3>
+            <div class="profile-row">
+                <strong> Home</strong>
+                <br>
+                <span>
+                    62, Anna Nagar,
+                    Bhavani, Tamil Nadu
+                </span>
+            </div>
+            <div class="profile-row">
+                <strong>
+                    Office
+                </strong>
+                <br>
+                <span>
+                    IT Park Road,
+                    Bhavani, Tamil Nadu
+                </span>
+            </div>
+        </div>
+        
+        <div class="profile-card">
+            <h3>
+                🧾 My Order History
+            </h3>
+            <div id="profileOrders">
+                <p>
+                    No orders yet.
+                </p>
+            </div>
+        </div>
+        
+        <div class="profile-card">
+            <h3>
+                ⚙️ Account
+            </h3>
+            <div class="profile-row">
+                🔔 Notifications
+            </div>
+            <div class="profile-row">
+                ❤️ Favourite Restaurants
+            </div>
+            <div class="profile-row">
+                💳 Payment Methods
+            </div>
+            <div class="profile-row">
+                🛟 Help & Support
+            </div>
+        </div>
+    </div>
+</section>
+
+<div
+    class="cart-button"
+    onclick="openCart()">
+    🛒 Cart
+    <span
+        id="cartCount"
+        class="cart-count">
+        0
+    </span>
+</div>
+
+<div
+    id="cartModal"
+    class="modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>
+                🛒 Your Cart
+            </h2>
+            <span
+                class="close"
+                onclick="closeCart()">
+                ×
+            </span>
+        </div>
+        <div id="cartItems">
+        </div>
+        <div class="total">
+            <span>
+                Total
+            </span>
+            <span id="cartTotal">
+                ₹0
+            </span>
+        </div>
+        <button
+            class="checkout"
+            onclick="placeOrder()">
+            Place Order
+        </button>
+    </div>
+</div>
+
+<div
+    id="toast"
+    class="toast">
+    Item added to cart!
+</div>
+<script src="rest.js"></script>
+</body>
+</html>
+
